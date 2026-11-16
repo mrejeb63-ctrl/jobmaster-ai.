@@ -1,0 +1,14 @@
+{
+  "name": "JobMaster AI — Career Builder",
+  "short_name": "JobMaster AI",
+  "description": "Build your CV, prepare for interviews and track job applications.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f7fb",
+  "theme_color": "#142b4d",
+  "orientation": "portrait",
+  "icons": [
+    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
