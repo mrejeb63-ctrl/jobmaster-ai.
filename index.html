@@ -62,6 +62,39 @@
     </main>
   </div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="app.js"></script>
+  <script>
+  // Navigation fallback: keeps page switching available even if the main app bundle fails.
+  document.addEventListener('click', function (event) {
+    const control = event.target.closest('[data-page], [data-go]');
+    if (!control) return;
+    const page = control.dataset.page || control.dataset.go;
+    if (!page) return;
+    document.querySelectorAll('.page').forEach(function (section) {
+      section.classList.toggle('active', section.id === 'page-' + page);
+    });
+    document.querySelectorAll('.nav-item').forEach(function (item) {
+      item.classList.toggle('active', item.dataset.page === page);
+    });
+    const titles = {
+      home: 'Build your next opportunity.',
+      cv: 'Build your professional CV',
+      letter: 'Create a tailored cover letter',
+      interview: 'Prepare for your next interview',
+      jobs: 'Keep your applications moving'
+    };
+    const title = document.getElementById('pageTitle');
+    if (title) title.textContent = titles[page] || 'JobMaster AI';
+    window.scrollTo(0, 0);
+  });
+  window.addEventListener('error', function (event) {
+    const box = document.getElementById('appError');
+    if (box) {
+      box.hidden = false;
+      box.textContent = 'Some app features could not load. Please refresh the page. Details: ' + event.message;
+    }
+  });
+</script>
+<div id="appError" role="alert" hidden style="margin:12px;padding:12px;border-radius:8px;background:#fff1f0;color:#9b2424;font:14px Arial,sans-serif"></div>
+<script src="./app.js?v=1.1" defer></script>
 </body>
 </html>
