@@ -8,7 +8,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="enhancements.css?v=1.2">
+  <link rel="stylesheet" href="enhancements.css?v=2.0">
   <title>JobMaster AI</title>
 </head>
 <body>
@@ -21,8 +21,9 @@
         <button class="nav-item" data-page="letter"><span>✉</span><label data-i18n="navLetter">Cover Letter</label></button>
         <button class="nav-item" data-page="interview"><span>◎</span><label data-i18n="navInterview">Interview Coach</label></button>
         <button class="nav-item" data-page="jobs"><span>▣</span><label data-i18n="navJobs">Job Tracker</label></button>
+        <button class="nav-item" data-page="ai"><span>✦</span><label>AI Assistant</label></button>
       </nav>
-      <div class="sidebar-bottom"><div class="offline-pill"><i></i><span data-i18n="offlineReady">Ready to work offline</span></div><small>JOBMASTER AI · MVP 1.2</small></div>
+      <div class="sidebar-bottom"><div class="offline-pill"><i></i><span data-i18n="offlineReady">Ready to work offline</span></div><small>JOBMASTER AI · MVP 2.0</small></div>
     </aside>
 
     <main class="main-content">
@@ -57,6 +58,24 @@
       <section id="page-letter" class="page"><div class="page-intro"><div><p class="eyebrow" data-i18n="applicationStudio">APPLICATION STUDIO</p><h2 data-i18n="coverLetterTitle">Create a tailored cover letter</h2><p data-i18n="coverIntro">Generate a useful first draft based on the role and your experience.</p></div></div><div class="two-column"><form id="letterForm" class="panel form-panel"><label><span data-i18n="yourName">Your name</span><input id="letterName" placeholder="Your full name"></label><label><span data-i18n="targetRole">Target role</span><input id="letterRole" placeholder="e.g. Quality Engineer"></label><label><span data-i18n="employer">Employer</span><input id="letterCompany" placeholder="Company name"></label><label><span data-i18n="whyFit">Why are you a good fit?</span><textarea id="letterFit" rows="5" placeholder="Mention your experience, skills and one achievement..."></textarea></label><button class="btn btn-primary" type="submit" data-i18n="generateLetter">Generate cover letter</button></form><div class="panel output-panel"><div class="panel-title"><h3 data-i18n="yourDraft">Your draft</h3><button id="copyLetter" class="btn btn-ghost" data-i18n="copy">Copy</button></div><textarea id="letterOutput" rows="18" data-i18n-placeholder="letterPlaceholder" placeholder="Your cover letter will appear here..."></textarea></div></div></section>
 
       <section id="page-interview" class="page"><div class="page-intro"><div><p class="eyebrow" data-i18n="practiceStudio">PRACTICE STUDIO</p><h2 data-i18n="interviewTitle">Prepare for your next interview</h2><p data-i18n="interviewIntro">Choose a category, think through your answer and reveal a practical framework.</p></div></div><div class="interview-layout"><div class="panel interview-panel"><div class="interview-controls"><label><span data-i18n="category">Category</span><select id="questionCategory"><option value="general">General</option><option value="behavioral">Behavioral</option><option value="technical">Technical / Engineering</option></select></label><span class="question-count" id="questionCount">Question 1</span></div><div class="question-card"><span class="question-mark">Q</span><h3 id="questionText">Tell me about yourself.</h3><p data-i18n="thinkAnswer">Take a moment to structure your answer.</p><textarea id="answerNotes" rows="5" data-i18n-placeholder="answerPlaceholder" placeholder="Write your key points here..."></textarea><button id="revealAnswer" class="btn btn-primary" data-i18n="showFramework">Show answer framework</button><div id="answerFramework" class="framework hidden"></div></div><div class="question-actions"><button id="prevQuestion" class="btn btn-ghost" data-i18n="previous">← Previous</button><button id="nextQuestion" class="btn btn-dark" data-i18n="nextQuestion">Next question →</button></div></div><div class="panel interview-side"><span class="tool-icon orange">◎</span><h3 data-i18n="starMethod">Use the STAR method</h3><p data-i18n="starIntro">A clear structure for answering experience-based questions.</p><div class="star-list"><div><b>S</b><span><strong data-i18n="situation">Situation</strong><small data-i18n="situationText">Set the context.</small></span></div><div><b>T</b><span><strong data-i18n="task">Task</strong><small data-i18n="taskText">Explain your responsibility.</small></span></div><div><b>A</b><span><strong data-i18n="action">Action</strong><small data-i18n="actionText">Describe what you did.</small></span></div><div><b>R</b><span><strong data-i18n="result">Result</strong><small data-i18n="resultText">Share the measurable outcome.</small></span></div></div></div></div></section>
+
+      <section id="page-ai" class="page">
+        <div class="page-intro"><div><p class="eyebrow">GEMINI-POWERED CAREER TOOLS</p><h2>Real AI Career Assistant</h2><p>Get tailored CV, job-match, cover-letter and interview support.</p></div></div>
+        <div class="panel ai-security"><b>Privacy & API key safety</b><p>For this personal MVP, enter your own Google AI Studio API key. It is held only in this page's memory and is not saved to the app or repository. Requests go directly from your browser to Google. Do not use a key belonging to an employer or share this public app with your key entered. For a public commercial launch, move the key to a protected backend proxy.</p><a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Get a Gemini API key ↗</a></div>
+        <div class="two-column ai-layout">
+          <form id="aiForm" class="panel form-panel">
+            <label><span>Gemini API key (session only)</span><input id="aiApiKey" type="password" autocomplete="off" placeholder="Paste your API key" required></label>
+            <label><span>What do you need?</span><select id="aiTask"><option value="cv">Improve my CV</option><option value="match">Match my CV to a job</option><option value="letter">Write a tailored cover letter</option><option value="interview">Prepare for an interview</option><option value="career">Build a career development plan</option></select></label>
+            <label><span>Response language</span><select id="aiLanguage"><option value="English">English</option><option value="French">French</option><option value="Arabic">Arabic</option><option value="German">German</option></select></label>
+            <label><span>Your CV / experience</span><textarea id="aiCv" rows="7" placeholder="Paste your CV or summarize your experience..."></textarea></label>
+            <label><span>Job description / target role (optional)</span><textarea id="aiJob" rows="5" placeholder="Paste the job description or describe your target role..."></textarea></label>
+            <label><span>Additional instructions (optional)</span><textarea id="aiExtra" rows="3" placeholder="e.g. Focus on automotive product engineering and NPI."></textarea></label>
+            <button id="aiSubmit" type="submit" class="btn btn-primary">✦ Generate with Gemini</button>
+            <small class="ai-disclaimer">Use anonymized CV content where possible. Free-tier availability and quotas depend on your Google account and selected model.</small>
+          </form>
+          <div class="panel output-panel ai-output"><div class="panel-title"><h3>AI response</h3><div><button id="aiCopy" type="button" class="btn btn-ghost">Copy</button> <button id="aiClear" type="button" class="btn btn-ghost">Clear</button></div></div><div id="aiStatus" class="ai-status" aria-live="polite">Your personalized AI result will appear here.</div><textarea id="aiResult" rows="22" placeholder="Your AI-generated result will appear here..."></textarea></div>
+        </div>
+      </section>
 
       <section id="page-jobs" class="page"><div class="page-intro"><div><p class="eyebrow" data-i18n="jobWorkspace">JOB WORKSPACE</p><h2 data-i18n="trackTitle">Keep your applications moving</h2><p data-i18n="trackIntro">Save roles you have applied for and follow up at the right time.</p></div><button id="addJobToggle" class="btn btn-primary" data-i18n="addApplication">＋ Add application</button></div><form id="jobForm" class="panel job-form hidden"><div class="form-grid"><label><span data-i18n="jobRole">Job title</span><input id="jobRoleInput" required placeholder="Product Technician"></label><label><span data-i18n="jobEmployer">Company</span><input id="jobEmployerInput" required placeholder="Company name"></label><label><span data-i18n="jobCountry">Country / location</span><input id="jobCountryInput" placeholder="Germany"></label><label><span data-i18n="jobStatus">Status</span><select id="jobStatusInput"><option value="Applied">Applied</option><option value="Interview">Interview</option><option value="Offer">Offer</option><option value="Rejected">Rejected</option></select></label><label><span data-i18n="jobDate">Date applied</span><input id="jobDateInput" type="date"></label><label><span data-i18n="jobLink">Job link (optional)</span><input id="jobLinkInput" type="url" placeholder="https://..."></label></div><div class="form-actions"><button type="button" id="cancelJob" class="btn btn-ghost" data-i18n="cancel">Cancel</button><button class="btn btn-primary" type="submit" data-i18n="saveApplication">Save application</button></div></form><div class="job-summary"><div class="mini-stat"><span data-i18n="total">Total</span><b id="jobTotal">0</b></div><div class="mini-stat"><span data-i18n="applied">Applied</span><b id="jobApplied">0</b></div><div class="mini-stat"><span data-i18n="interviews">Interviews</span><b id="jobInterview">0</b></div><div class="mini-stat"><span data-i18n="offers">Offers</span><b id="jobOffers">0</b></div></div><div id="jobList" class="job-list"><div class="empty-state"><span>▣</span><b data-i18n="noApplications">No applications yet</b><p data-i18n="addFirstJob">Add your first opportunity to start tracking your progress.</p></div></div></section>
       <footer class="footer"><span>© 2026 JobMaster AI</span><span data-i18n="privacyLocal">Your information stays on this device in this MVP.</span></footer>
@@ -96,7 +115,7 @@
   });
 </script>
 <div id="appError" role="alert" hidden style="margin:12px;padding:12px;border-radius:8px;background:#fff1f0;color:#9b2424;font:14px Arial,sans-serif"></div>
-<script src="./app.js?v=1.2" defer></script>
-<script src="./enhancements.js?v=1.2" defer></script>
+<script src="./app.js?v=2.0" defer></script>
+<script src="./enhancements.js?v=2.0" defer></script>
 </body>
 </html>
