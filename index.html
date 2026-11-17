@@ -8,7 +8,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="enhancements.css?v=2.0">
+  <link rel="stylesheet" href="enhancements.css?v=2.1">
   <title>JobMaster AI</title>
 </head>
 <body>
@@ -22,8 +22,9 @@
         <button class="nav-item" data-page="interview"><span>◎</span><label data-i18n="navInterview">Interview Coach</label></button>
         <button class="nav-item" data-page="jobs"><span>▣</span><label data-i18n="navJobs">Job Tracker</label></button>
         <button class="nav-item" data-page="ai"><span>✦</span><label>AI Assistant</label></button>
+        <button class="nav-item" data-page="career-tools"><span>⌕</span><label>CV Analyzer & Job Finder</label></button>
       </nav>
-      <div class="sidebar-bottom"><div class="offline-pill"><i></i><span data-i18n="offlineReady">Ready to work offline</span></div><small>JOBMASTER AI · MVP 2.0</small></div>
+      <div class="sidebar-bottom"><div class="offline-pill"><i></i><span data-i18n="offlineReady">Ready to work offline</span></div><small>JOBMASTER AI · VERSION 2.1</small></div>
     </aside>
 
     <main class="main-content">
@@ -77,6 +78,25 @@
         </div>
       </section>
 
+      <section id="page-career-tools" class="page">
+        <div class="page-intro"><div><p class="eyebrow">CAREER OPTIMIZATION</p><h2>CV Analyzer & Job Finder</h2><p>Check your CV structure and find relevant opportunities across Tunisia and international markets.</p></div></div>
+        <div class="panel jm-extra">
+          <h3>ATS CV Analyzer</h3>
+          <p class="jm-muted">A transparent checklist-based estimate, not a score from any employer's private ATS. Your text is analyzed locally in this browser and is not uploaded.</p>
+          <label class="jm-label">Paste your CV text<textarea id="atsCvText" rows="9" placeholder="Paste the text copied from your CV..."></textarea></label>
+          <label class="jm-label">Target job description (optional)<textarea id="atsJobText" rows="5" placeholder="Paste the job description to check keyword coverage..."></textarea></label>
+          <div class="jm-actions"><button type="button" id="atsAnalyzeBtn" class="btn btn-primary">Analyze my CV</button><button type="button" id="atsUseCvBtn" class="btn btn-ghost">Use my CV Builder data</button><button type="button" id="atsClearBtn" class="btn btn-ghost">Clear</button></div>
+          <div id="atsResult" class="jm-result" aria-live="polite">Your CV score and recommendations will appear here.</div>
+        </div>
+        <div class="panel jm-extra">
+          <h3>Job Finder</h3>
+          <p class="jm-muted">Search external job boards. Results open on the selected website; JobMaster AI does not scrape or store job listings.</p>
+          <div class="jm-grid"><label class="jm-label">Job title / keywords<input id="finderRole" value="Product Engineering Technician" placeholder="e.g. Product Engineer, Quality Technician"></label><label class="jm-label">Country / location<input id="finderLocation" value="Tunisia" placeholder="Tunisia, Germany, Austria..."></label></div>
+          <div class="jm-actions"><button type="button" id="findJobsBtn" class="btn btn-primary">Find jobs</button><button type="button" id="findRemoteBtn" class="btn btn-ghost">Find remote jobs</button></div>
+          <div id="jobFinderLinks" class="jm-links" aria-live="polite"><span class="jm-muted">Choose your role and location, then search.</span></div>
+        </div>
+      </section>
+
       <section id="page-jobs" class="page"><div class="page-intro"><div><p class="eyebrow" data-i18n="jobWorkspace">JOB WORKSPACE</p><h2 data-i18n="trackTitle">Keep your applications moving</h2><p data-i18n="trackIntro">Save roles you have applied for and follow up at the right time.</p></div><button id="addJobToggle" class="btn btn-primary" data-i18n="addApplication">＋ Add application</button></div><form id="jobForm" class="panel job-form hidden"><div class="form-grid"><label><span data-i18n="jobRole">Job title</span><input id="jobRoleInput" required placeholder="Product Technician"></label><label><span data-i18n="jobEmployer">Company</span><input id="jobEmployerInput" required placeholder="Company name"></label><label><span data-i18n="jobCountry">Country / location</span><input id="jobCountryInput" placeholder="Germany"></label><label><span data-i18n="jobStatus">Status</span><select id="jobStatusInput"><option value="Applied">Applied</option><option value="Interview">Interview</option><option value="Offer">Offer</option><option value="Rejected">Rejected</option></select></label><label><span data-i18n="jobDate">Date applied</span><input id="jobDateInput" type="date"></label><label><span data-i18n="jobLink">Job link (optional)</span><input id="jobLinkInput" type="url" placeholder="https://..."></label></div><div class="form-actions"><button type="button" id="cancelJob" class="btn btn-ghost" data-i18n="cancel">Cancel</button><button class="btn btn-primary" type="submit" data-i18n="saveApplication">Save application</button></div></form><div class="job-summary"><div class="mini-stat"><span data-i18n="total">Total</span><b id="jobTotal">0</b></div><div class="mini-stat"><span data-i18n="applied">Applied</span><b id="jobApplied">0</b></div><div class="mini-stat"><span data-i18n="interviews">Interviews</span><b id="jobInterview">0</b></div><div class="mini-stat"><span data-i18n="offers">Offers</span><b id="jobOffers">0</b></div></div><div id="jobList" class="job-list"><div class="empty-state"><span>▣</span><b data-i18n="noApplications">No applications yet</b><p data-i18n="addFirstJob">Add your first opportunity to start tracking your progress.</p></div></div></section>
       <footer class="footer"><span>© 2026 JobMaster AI</span><span data-i18n="privacyLocal">Your information stays on this device in this MVP.</span></footer>
     </main>
@@ -97,6 +117,7 @@
     });
     const titles = {
       home: 'Build your next opportunity.',
+      'career-tools': 'CV Analyzer & Job Finder',
       cv: 'Build your professional CV',
       letter: 'Create a tailored cover letter',
       interview: 'Prepare for your next interview',
@@ -115,7 +136,9 @@
   });
 </script>
 <div id="appError" role="alert" hidden style="margin:12px;padding:12px;border-radius:8px;background:#fff1f0;color:#9b2424;font:14px Arial,sans-serif"></div>
-<script src="./app.js?v=2.0" defer></script>
-<script src="./enhancements.js?v=2.0" defer></script>
+<script src="./app.js?v=2.1" defer></script>
+<script src="./enhancements.js?v=2.1" defer></script>
+<script src="./ai-assistant.js?v=2.1" defer></script>
+<script src="./career-tools.js?v=2.1" defer></script>
 </body>
 </html>
