@@ -1,48 +1,53 @@
-# JobMaster AI — Android-friendly MVP 1.0
+# JobMaster AI — Version 1.2
 
-A free, installable Progressive Web App for building a CV, drafting a cover letter, practicing interviews and tracking job applications. The first version uses browser storage and does not send CV information to a server.
+A free, installable, offline-first Progressive Web App (PWA) for career preparation. It is designed for English, French, Arabic (RTL) and German.
 
 ## Features
-- English, French, Arabic (RTL layout) and German interface
-- CV editor with live preview and Classic / Modern / Minimal templates
-- Print-to-PDF export (choose Save as PDF in the browser print dialog)
+- CV builder with live preview and Classic / Modern / Minimal templates
+- Print-to-PDF for CV and cover letter (choose Save as PDF in the browser print dialog)
 - Cover letter first-draft generator
-- General, behavioral and technical interview question bank with answer frameworks
-- Job application tracker with status, date and optional link
-- Local device storage and offline cache
+- CV/job-description keyword comparison with a transparent heuristic score (not a certified ATS score)
+- Career assistant prompt builder for use with ChatGPT or Gemini; no paid AI API is embedded
+- General, behavioral and technical interview question bank and answer frameworks
+- Checklist-based interview answer review (not an assessment of professional competence)
+- International job search links for Tunisia, France, Germany and Austria; searches open third-party job platforms and do not scrape or guarantee vacancies
+- Job application tracker
+- JSON backup and restore for CV, job records, language and practice count
+- English, French, Arabic and German interface
+- Local browser storage; no account or server required
+- Updated service worker cache and network-first refresh for app shell files
 
 ## Run on a computer
 1. Extract the ZIP.
-2. Open a terminal in this folder.
-3. Run a local static server, for example `python -m http.server 8000`.
+2. Open a terminal in the `jobmaster-ai` folder.
+3. Run `python -m http.server 8000`.
 4. Open `http://localhost:8000` in Chrome or Edge.
 
-A local server is needed for service-worker offline support. You can still open `index.html` directly for a basic preview, but install/offline features require HTTP(S).
+## Publish/update with GitHub Pages
+1. Extract this ZIP.
+2. Open the existing GitHub repository `jobmaster-ai`.
+3. Choose **Add file → Upload files**.
+4. Upload every file inside the `jobmaster-ai` folder to the repository root, replacing old versions.
+5. Commit the changes to the `main` branch.
+6. Keep Settings → Pages set to **Deploy from a branch**, branch `main`, folder `/ (root)`.
+7. Wait for the deployment to finish.
+8. On Android, open the website in Chrome, refresh it, and relaunch the installed PWA. If an old version remains, uninstall the home-screen app and reinstall it from the updated HTTPS website.
 
-## Install on Android
-1. Host this folder on an HTTPS static host (GitHub Pages is a free option) or serve it over HTTPS from your computer.
-2. Open the HTTPS site in Chrome on Android.
-3. Open the browser menu and choose **Install app** or **Add to Home screen**.
-4. Launch JobMaster AI from the home screen. Open it once online so the offline cache is populated.
+## Privacy and limitations
+- CVs, job applications and practice reviews are stored in local browser storage on that device. They are not uploaded to a server by this app.
+- Use Home → Data backup to download a JSON backup before changing devices or clearing browser data. The backup contains personal information; keep it private.
+- CV matching is a basic keyword overlap indicator, not a real ATS simulation or guarantee of selection.
+- Career assistant buttons generate prompts. Copy them into ChatGPT or Gemini; there is no embedded AI model or paid API.
+- Job search opens external websites. Availability, account requirements, country access and listings are controlled by those providers.
+- PDF export uses browser printing. Select **Save as PDF**.
+- This is a PWA, not a native APK. GitHub Pages hosting is free for a public repository, but Google Play publishing is a separate process and may involve fees.
 
-## GitHub Pages deployment (free)
-1. Create a GitHub account and a new public repository, e.g. `jobmaster-ai`.
-2. Upload all files in this folder to the repository root.
-3. In repository Settings → Pages, select Deploy from a branch, choose `main` and `/ (root)`, then Save.
-4. Wait for the published HTTPS URL, open it on Android Chrome and install it.
-
-## Notes and limitations
-- This is a working MVP, not a native APK. It installs and runs as an app-like PWA on Android.
-- CVs and job records are stored in the browser's local storage on that device. Clearing browser site data can erase them. Export/backup is not yet included.
-- Cover letters and interview frameworks are template-based in this free version. There is no integrated AI model or live job-feed API.
-- PDF export uses the browser's print dialog. Select **Save as PDF**.
-- Before public release, add a privacy policy, test on multiple Android devices, and consider encrypted backup, data export/import, accessibility and security review.
-- The Google Fonts import is an optional online enhancement; the app's system-font fallback works offline.
-
-## Project files
+## Files
 - `index.html` — app screens and forms
-- `styles.css` — responsive interface and print styles
-- `app.js` — language, CV preview, local data, letter, interview and tracker logic
+- `styles.css` — main interface
+- `enhancements.css` — version 1.2 additional interface styles
+- `app.js` — original app logic
+- `enhancements.js` — CV analyzer, prompt helper, job search, interview review and backup/restore
 - `manifest.webmanifest` — install metadata
-- `sw.js` — offline cache
+- `sw.js` — offline cache and update strategy
 - `icon.svg` — app icon
