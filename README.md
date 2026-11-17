@@ -1,30 +1,30 @@
-# JobMaster AI 2.1
+# JobMaster AI 2.2 — Complete Career Toolkit
 
-## What's new in 2.1
-- Local ATS CV Analyzer with a transparent 100-point checklist, recommendations and optional job-description keyword coverage.
-- Job Finder shortcuts for LinkedIn, Indeed, Google Jobs, Tanitjobs, Keejob, EURES and Make it in Germany. Search results open on the external job-board websites.
-- Career tools work without an AI key. CV analysis runs locally in the browser; job search opens external websites.
-- Preserves the 2.0 Gemini AI Assistant, CV Builder, PDF print/export, cover letter, interview coach, job tracker, local storage and offline PWA.
-
-## Important notes
-The ATS score is a heuristic CV-structure checklist, not an employer ATS score or a guarantee of selection. Keyword coverage uses simple word matching and may miss synonyms. Review every recommendation and include only skills and experience that are true.
-
-The Job Finder does not scrape or guarantee current vacancies; it opens external job-board search pages. Some boards may change their URLs or require sign-in.
-
-## Gemini API key safety
-The 2.0 AI Assistant remains a personal testing integration. The browser sends requests directly to Google Gemini and the key can be inspected in browser developer tools. Never put a key in source code, GitHub, screenshots or a shared device. For a public multi-user or commercial launch, use a protected backend proxy with authentication, rate limits, abuse protection and server-side secret storage. CV content is sent to Google when Generate is pressed; anonymize test data and review Google's current terms and data-use policy.
-
-Create a key at https://aistudio.google.com/app/apikey. Free-tier access, model availability and quotas depend on account, region and Google's current policies. The current model is configured in `ai-assistant.js` as `gemini-2.5-flash`; change it if Google no longer supports it for your project.
+## Included features
+- **CV Builder:** personal details, professional summary, experience, education, skills, live preview, Classic/Modern/Minimal templates and browser PDF export.
+- **Cover Letter Generator:** creates a first draft from the target role, employer and candidate fit notes.
+- **Interview Coach:** behavioral and technical question sets, answer notes and STAR framework; practice sessions are counted.
+- **Job Tracker:** save applications, company, location, status, date and job link; delete entries; filter by keyword and status.
+- **Gemini AI Assistant:** CV improvement, CV/job matching, cover letters, interview preparation and career development plans; response languages English, French, Arabic and German.
+- **ATS CV Analyzer:** local 100-point structural checklist, improvement suggestions and approximate job-description keyword coverage. It is not an employer ATS score.
+- **Job Finder:** search links for LinkedIn, Indeed, Google Jobs, Tanitjobs, Keejob, EURES and Make it in Germany; remote search supported.
+- **Career performance dashboard:** CV completeness estimate, active applications, interview rate, offers and practice sessions.
+- **Backup / restore:** export all `jm_` app data to a JSON file and import it on this or another browser/device.
+- **PWA/offline shell:** installable on Android and desktop; static app screens work offline after first successful load. Gemini and external job boards require internet.
+- **Languages:** English, French, Arabic and German interface support for the existing translated interface; some newly added tool labels remain English.
 
 ## Deploy to GitHub Pages
-1. Extract the ZIP and open the `jobmaster-ai` folder.
-2. In your GitHub repository choose **Add file → Upload files**.
-3. Upload every file inside `jobmaster-ai` to the repository root, replacing existing files. Ensure `career-tools.js` is included.
-4. Commit to `main`; keep Pages set to `main` and `/(root)`.
-5. Wait for deployment, then refresh the website. If installed as a PWA, close and reopen it. The service-worker cache is now `jobmaster-ai-v2-1`. If the old version remains, uninstall the home-screen shortcut, reopen the website and reinstall.
+1. Download and extract `JobMaster_AI_2.2.zip`.
+2. Open the `jobmaster-ai` folder.
+3. In your GitHub repository choose **Add file → Upload files**.
+4. Upload all files inside `jobmaster-ai` to the repository root, replacing existing files. Include `dashboard.js`.
+5. Commit to `main`; keep Pages configured for `main` and `/(root)`.
+6. Wait for deployment. Refresh the website. For an installed PWA, close and reopen it. If the old version remains, uninstall the home-screen shortcut, reopen the website and reinstall.
 
-## Local test
-Serve the folder through HTTP/HTTPS (not `file://`). For example: `python -m http.server 8000`.
+## Gemini API key and privacy
+The Gemini assistant sends the CV/job text and API key from the browser directly to Google when Generate is pressed. The key is not saved in app local storage, but browser-side keys are inspectable and are not safe for a public multi-user service. Never hardcode a key in source code or GitHub, and do not use an employer key. For public/commercial launch, use a protected backend with authentication, server-side secret storage, quotas and abuse protection. Anonymize CVs and review Google's current terms and data-use settings. Free access, model availability and quotas can change.
 
-## Privacy
-CV and job-tracker data remain in browser local storage on this device. The ATS Analyzer processes pasted CV text locally and does not send it to a server. AI Assistant inputs are sent to Google only when you submit a Gemini request. Job Finder searches are performed on external websites. Avoid sensitive personal data. This is not a production-ready secure SaaS backend.
+Create a personal test key at https://aistudio.google.com/app/apikey. The current model is configured in `ai-assistant.js`; update it if Google changes model availability.
+
+## Data and limitations
+CV and tracker information are stored in this browser's local storage. Export a backup before clearing browser data or changing devices. The ATS score is a heuristic, the keyword comparison is approximate, and the Job Finder opens external job-board pages rather than scraping or guaranteeing live vacancies. PDF export uses the browser print dialog (choose Save as PDF).
